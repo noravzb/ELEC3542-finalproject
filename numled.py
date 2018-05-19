@@ -15,8 +15,8 @@ def show_number(sense, value, color=(255, 255, 255)):
 		color. Each element must be an integer between 0 and 255. The default
 		value is (255, 255, 255).
 	"""
-	if value < 0 or value > 10:
-		raise ValueError("value must be in the range of 0 to 10")
+	if value < 0 or value > 12:
+		raise ValueError("value must be in the range of 0 to 12")
 	sense.clear()
 	show_digit(sense, value, color=color)
 
@@ -44,8 +44,8 @@ def show_digit(sense, value, x=0, y=0, color=(255, 255, 255)):
 	"""
 	if not sense:
 		raise Exception("Sense HAT is unavailable")
-	if value < 0 or value > 10:
-		raise ValueError("value must be in the range of 0 to 10")
+	if value < 0 or value > 12:
+		raise ValueError("value must be in the range of 0 to 12")
 	digit = font.digits[value]
 	for column in range(x, x + font.width):
 		for row in range(y, y + font.height):

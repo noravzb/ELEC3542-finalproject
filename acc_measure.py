@@ -3,6 +3,8 @@ import time
 import datetime
 import math
 import numled
+import joystick
+import alarm
 
 from sense_hat import SenseHat
 sense = SenseHat()
@@ -26,12 +28,6 @@ def get_acceleration(a, b):
     acceleration = math.sqrt(xsum + ysum + zsum)
     return acceleration
 
-
-def warn():
-    for i in range(0, 5):
-        numled.show_number(sense, 0, colors[i % len(colors)])
-        time.sleep(.2)
-    
 # Logging function with the temperature value as argument
 def log_acceleration_to_file():
     # Open (or create if not exists) the file named "acceleration.txt"
@@ -52,7 +48,12 @@ def log_acceleration_to_file():
     temp_log.close()
     
     if (acceleration > 1):
-        warn()
+        print("[" + lcltm + "]  A: %.2f \n" % acceleration)
+        cancelled = joystick.warn()
+        
+        if (cancelled == False):
+            alarm.send()
+        
     time.sleep(.25)
     
 sense.clear()
