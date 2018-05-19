@@ -58,6 +58,5 @@ def log_acceleration_to_file():
     
 sense.clear()
 temp_log = open("acceleration.txt", "w")
-#print("Acceleration:", acceleration)
 while True:
     log_acceleration_to_file()
