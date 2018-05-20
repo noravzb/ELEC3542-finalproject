@@ -12,14 +12,11 @@ sense = SenseHat()
 
 colors = [(255, 0, 0), (255, 255, 255)]
 cancelled = False
-was_cancelled = False
 
 def pushed(event):
     global cancelled
-    global was_cancelled
     if event.action != ACTION_RELEASED:
         cancelled = True
-        was_cancelled = True
         time.sleep(1)
         numled.show_number(sense, 10, colors[0])
         time.sleep(.5)
@@ -29,6 +26,7 @@ def pushed(event):
             
 def warn():
     global cancelled
+    cancelled = False
     timer = 6
     sense.clear()
     sense.stick.direction_any = pushed
@@ -39,5 +37,4 @@ def warn():
         time.sleep(.25)
         sense.clear()
         timer -= 1
-    cancelled = False
-    return was_cancelled
+    return cancelled
